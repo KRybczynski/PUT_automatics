@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+   <div class="form">
+      <form action="/" method="POST">
+         <h2>Dane bojlera</h2>
+         <p>
+            <label>Temperatura zadana [℃]:</label><br>
+            <input type="range" name="vals" value="{{  temp_max  }}" min="35" max="70" step="1"
+               oninput="document.getElementById('fTemp_max').innerHTML = this.value" />
+            <label id="fTemp_max">{{  temp_max  }}</label>
+         </p>
+         <p>
+            <label>Temperatura początkowa [℃]:</label><br>
+            <input type="range" name="vals" value="{{temp_init}}" min="20" max="60" step="1"
+               oninput="document.getElementById('tTemp_init').innerHTML = this.value" />
+            <label id="tTemp_init">{{temp_init}}</label>
+         </p>
+         <p>
+            <label>Pojemność [l]:</label><br>
+            <input type="range" name="vals" value="{{  V  }}" min="80" max="140" step="20"
+               oninput="document.getElementById('tV').innerHTML = this.value" />
+            <label id="tV">{{  V  }}</label>
+         </p>
+         <p>
+            <label>Maksymalna moc grzałki [kW]:</label><br>
+            <input type="range" name="vals" value="{{ P }}" min="1.5" max="5" step="0.1"
+               oninput="document.getElementById('tP').innerHTML = this.value" />
+            <label id="tP">{{ P }}</label>
+         </p>
+
+         <h2>Dane wpływającej wody</h2>
+         <p>
+            <label>procent całkowitej objętości jaki zostanie wymieniony w ciągu godziny:</label><br>
+            <input type="range" name="vals" value="{{ m_in }}" min="1" max="20" step="1"
+               oninput="document.getElementById('tm_in').innerHTML = this.value" />
+            <label id="tm_in">{{ m_in }}</label>
+         </p>
+         <h2>parametry regulatora</h2>
+         <p>
+            <label>kp:</label><br>
+            <input type="range" name="vals" value="{{ kp }}" min="100" max="1000" step="10"
+               oninput="document.getElementById('kp').innerHTML = this.value" />
+            <label id="kp">{{ kp }}</label>
+         </p>
+         <p>
+            <label>Tp:</label><br>
+            <input type="range" name="vals" value="{{ Tp }}" min="1" max="5" step="1"
+               oninput="document.getElementById('Tp').innerHTML = this.value" />
+            <label id="Tp">{{ Tp }}</label>
+         </p>
+         <p><input type="submit" value="submit"/></p>
+      </form>
+   </div>
+   <div id='chart' class='chart' ”></div>
+   
+</body>
+
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+    var graphs = {{ graphJSON | safe}};
+    Plotly.plot('chart', graphs, {});
+</script>
+
+
+</html>
